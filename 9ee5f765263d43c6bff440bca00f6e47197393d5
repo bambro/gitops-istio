@@ -1,0 +1,1 @@
+{"jobID":"bff99178-a7c3-e33f-1489-cdb6cfb81ad5","spec":{"type":"policy","cause":{"Message":"","User":"bambro \u003cblake.ambrose@monster.com\u003e"},"spec":{"prod:deployment/node-express-app":{"add":{"automated":"true"},"remove":{}}}},"result":null}
