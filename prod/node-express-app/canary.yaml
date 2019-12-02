@@ -49,14 +49,7 @@ spec:
     # canary increment step
     # percentage (0-100)
     stepWeight: 10
-    # canary match condition
-    match:
-      - headers:
-          user-agent:
-            regex: "^(?!.*Chrome)(?=.*\bSafari\b).*$"
-      - headers:
-          cookie:
-            regex: "^(.*?;)?(type=insider)(;.*)?$"
+    # metrics
     metrics:
     - name: request-success-rate
       # minimum req success rate (non 5xx responses)
