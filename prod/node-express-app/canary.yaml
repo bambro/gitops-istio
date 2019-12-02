@@ -27,7 +27,7 @@ spec:
     - public-gateway.istio-system.svc.cluster.local
     # Istio virtual service host names (optional)
     hosts:
-    - node-express-app
+    - "*"
     # Istio traffic policy (optional)
     trafficPolicy:
       tls:
