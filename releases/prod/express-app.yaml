@@ -17,6 +17,8 @@ spec:
     replicaCount: 1
     service:
       port: 8080
+    deployment:
+      containerPort: 8080
     # canary:
     #   enabled: true
     #   istioIngress:
