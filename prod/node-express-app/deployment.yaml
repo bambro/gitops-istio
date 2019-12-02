@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: node-express-app
-        image: allclasspenguin/node-express-app:dev-00022
+        image: allclasspenguin/node-express-app:dev-00023
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
