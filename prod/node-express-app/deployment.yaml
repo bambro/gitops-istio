@@ -6,6 +6,8 @@ metadata:
   namespace: prod
   labels:
     app: node-express-app
+  annotations:
+    fluxcd.io/automated: 'true'
 spec:
   minReadySeconds: 5
   revisionHistoryLimit: 5
