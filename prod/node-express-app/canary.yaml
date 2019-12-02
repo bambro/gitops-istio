@@ -69,9 +69,9 @@ spec:
         timeout: 30s
         metadata:
           type: bash
-          cmd: "curl -sd 'test' http://node-express-app-canary:8080/token | grep token"
+          cmd: "curl -sd 'test' http://node-express-app-canary:8080/"
       - name: load-test
         url: http://flagger-loadtester.prod/
         timeout: 5s
         metadata:
-          cmd: "hey -z 1m -q 10 -c 2 http://node-express-app-canary.prod:9898/"
+          cmd: "hey -z 1m -q 10 -c 2 http://node-express-app-canary.prod:8080/status/200"
