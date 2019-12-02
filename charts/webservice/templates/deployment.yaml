@@ -1,0 +1,73 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "webservice.fullname" . }}
+  labels:
+    app: {{ include "webservice.name" . }}
+    chart: {{ include "webservice.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    {{- if .Values.deployment.labels }}
+    {{ toYaml .Values.deployment.labels }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "webservice.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "webservice.name" . }}
+        release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Chart.Name "/templates/config.yaml") . | sha256sum }}
+        {{- if .Values.deployment.annotations }}
+{{ toYaml .Values.deployment.annotations | indent 8 }}
+        {{- end }}
+    spec:
+      serviceAccountName: {{ if .Values.rbac.install }}{{ template "webservice.fullname" . }}{{ else }}"{{ .Values.rbac.serviceAccountName }}"{{ end }}
+      {{- if .Values.docker.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.docker.imagePullSecrets | indent 8 }}
+      {{- end }}
+      volumes: []
+      containers:
+        - name: {{ include "webservice.name" . }}
+          image: {{ .Values.image }}
+          imagePullPolicy: {{ .Values.docker.pullPolicy }}
+          env:
+            {{- if .Values.deployment.env }}
+{{ toYaml .Values.deployment.env | indent 10}}
+            {{- end }}
+          {{- if .Values.deployment.envFrom }}
+          envFrom:
+          - configMapRef:
+               name: {{ .Release.Name }}-configmap
+          {{- end }}
+          ports:
+            - name: {{ .Values.deployment.containerPortName }}
+              containerPort: {{ .Values.deployment.containerPort }}
+              protocol: TCP
+          livenessProbe:
+{{ toYaml .Values.deployment.livenessProbe | indent 12 }}
+          readinessProbe:
+{{ toYaml .Values.deployment.readinessProbe | indent 12 }}
+        {{- if .Values.deployment.extraContainers }}
+{{toYaml .Values.deployment.extraContainers | indent 8 }}
+        {{- end }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+      {{- end }}

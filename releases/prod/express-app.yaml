@@ -1,0 +1,29 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: express-app
+  namespace: prod
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.chart-image: glob:dev-*
+spec:
+  releaseName: express-app-prod
+  chart:
+    git: git@github.com:bambro/gitops-istio
+    path: charts/webservice
+    ref: master
+  values:
+    image: allclasspenguin/node-express-app:dev-00024
+    replicaCount: 1
+    service:
+      port: 8080
+    # canary:
+    #   enabled: true
+    #   istioIngress:
+    #     enabled: true
+    #     gateway: public-gateway.istio-system.svc.cluster.local
+    #     host: "*"
+    #   loadtest:
+    #     enabled: true
+    #   helmtest:
+    #     enabled: true
