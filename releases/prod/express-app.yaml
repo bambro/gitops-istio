@@ -15,7 +15,7 @@ spec:
     path: charts/webservice
     ref: master
   values:
-    image: allclasspenguin/node-express-app:dev-00024
+    image: allclasspenguin/node-express-app:dev-00026
     replicaCount: 1
     service:
       port: 8080
@@ -93,15 +93,15 @@ spec:
       interval: 30s
     # testing (optional)
     webhooks:
-      - name: acceptance-test
-        type: pre-rollout
-        url: http://flagger-loadtester.prod/
-        timeout: 30s
-        metadata:
-          type: bash
-          cmd: "curl -sd 'test' http://express-app-canary:8080/"
-      - name: load-test
-        url: http://flagger-loadtester.prod/
-        timeout: 5s
-        metadata:
-          cmd: "hey -z 1m -q 10 -c 2 http://express-app-canary.prod:8080/status/200"
+    - name: acceptance-test
+      type: pre-rollout
+      url: http://flagger-loadtester.prod/
+      timeout: 30s
+      metadata:
+        type: bash
+        cmd: "curl -sd 'test' http://express-app-canary:8080/"
+    - name: load-test
+      url: http://flagger-loadtester.prod/
+      timeout: 5s
+      metadata:
+        cmd: "hey -z 1m -q 10 -c 2 http://express-app-canary.prod:8080/status/200"
