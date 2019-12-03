@@ -2,17 +2,17 @@
 apiVersion: flagger.app/v1alpha3
 kind: Canary
 metadata:
-  name: {{ include "webservice.fullname" . }}
+  name: {{ template "webservice.fullname" . }}
   labels:
-    app: {{ include "webservice.name" . }}
-    chart: {{ include "webservice.chart" . }}
+    app: {{ template "webservice.name" . }}
+    chart: {{ template "webservice.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "webservice.fullname" . }}
+    name: {{ template "webservice.fullname" . }}
   progressDeadlineSeconds: 60
   service:
     port: {{ .Values.service.port }}
@@ -44,7 +44,7 @@ spec:
         timeout: 5s
         metadata:
           type: cmd
-          cmd: "hey -z 1m -q 5 -c 2 http://{{ include "webservice.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}"
+          cmd: "hey -z 1m -q 5 -c 2 http://{{ template "webservice.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}"
           logCmdOutput: "true"
       {{- end }}
 {{- end }}

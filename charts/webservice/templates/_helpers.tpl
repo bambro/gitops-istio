@@ -4,7 +4,6 @@ Expand the name of the chart.
 */}}
 
 {{- define "webservice.name" -}}
-{{- $nameOverride := printf "%s-%s" .Values.namePrefix .Values.nameOverride -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 

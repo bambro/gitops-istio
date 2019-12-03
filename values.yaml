@@ -1,0 +1,13 @@
+image: allclasspenguin/node-express-app:dev-00031
+replicaCount: 1
+service:
+    port: 8080
+deployment:
+    containerPort: 8080
+canary:
+    enabled: true
+    istioIngress:
+        enabled: false
+    loadtest:
+        enabled: true
+        url: http://flagger-loadtester.prod/
