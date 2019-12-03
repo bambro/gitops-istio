@@ -15,7 +15,7 @@ spec:
     path: charts/webservice
     ref: master
   values:
-    image: allclasspenguin/node-express-app:dev-00028
+    image: allclasspenguin/node-express-app:dev-00029
     replicaCount: 1
     service:
       port: 8080
