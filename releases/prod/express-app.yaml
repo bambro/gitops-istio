@@ -24,9 +24,7 @@ spec:
     canary:
       enabled: true
       istioIngress:
-        enabled: true
-        gateway: public-gateway.istio-system.svc.cluster.local
-        host: "*"
+        enabled: false
       loadtest:
         enabled: true
         url: http://flagger-loadtester.prod/
