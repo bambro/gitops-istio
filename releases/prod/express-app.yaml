@@ -27,7 +27,7 @@ spec:
         enabled: true
         gateway: public-gateway.istio-system.svc.cluster.local
         host: "*"
-      loadtest:
+      acceptancetest:
         enabled: true
-      helmtest:
+      loadtest:
         enabled: true

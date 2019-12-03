@@ -12,7 +12,7 @@ spec:
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name:  {{ template "webservice.fullname" . }}
+    name: {{ template "webservice.fullname" . }}
   progressDeadlineSeconds: 60
   service:
     port: {{ .Values.service.port }}
@@ -45,7 +45,6 @@ spec:
         timeout: 30s
         metadata:
           type: bash
-          cmd: "test {{ .Release.Name }} --cleanup"
           cmd: "curl -sd 'test' http://{{ template "webservice.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}"
       {{- end }}
       {{- if .Values.canary.loadtest.enabled }}
@@ -53,6 +52,7 @@ spec:
         url: {{ .Values.canary.loadtest.url }}
         timeout: 5s
         metadata:
+          type: bash
           cmd: "hey -z 1m -q 5 -c 2 http://{{ template "webservice.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}"
       {{- end }}
 {{- end }}
