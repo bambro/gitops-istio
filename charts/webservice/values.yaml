@@ -97,11 +97,7 @@ canary:
     # maximum req duration P99
     # milliseconds
     latency: 500
-  acceptancetest:
-    enabled: false
-    # load tester address
-    url: http://flagger-loadtester.test/
   loadtest:
     enabled: false
     # helm tester address
-    url: http://flagger-loadtester.test/
+    url: http://flagger-loadtester.default/

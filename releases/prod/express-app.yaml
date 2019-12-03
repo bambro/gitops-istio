@@ -29,3 +29,4 @@ spec:
         host: "*"
       loadtest:
         enabled: true
+        url: http://flagger-loadtester.prod/
