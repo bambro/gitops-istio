@@ -6,7 +6,7 @@ metadata:
   name: express-app
   namespace: prod
   annotations:
-    flux.weave.works/automated: "true"
+    flux.weave.works/automated: "false"
     flux.weave.works/tag.chart-image: glob:dev-*
 spec:
   releaseName: express-app-prod

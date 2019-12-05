@@ -4,12 +4,12 @@ apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
   name: express-app
-  namespace: default
+  namespace: flux
   annotations:
-    flux.weave.works/automated: "true"
+    flux.weave.works/automated: "false"
     flux.weave.works/tag.chart-image: glob:dev-*
 spec:
-  releaseName: express-app-default
+  releaseName: express-app-flux
   chart:
     git: git@github.com:bambro/gitops-istio
     path: charts/webservice
