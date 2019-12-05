@@ -23,7 +23,7 @@ spec:
     deployment:
       containerPort: 8080
     canary:
-      enabled: true
+      enabled: false
       istioIngress:
         enabled: false
       loadtest:
