@@ -24,6 +24,14 @@ spec:
     canary:
       enabled: true
       config:
+        interval: 1m
+        threshold: 10
+        maxWeight: 50
+        stepWeight: 10
+        metrics:
+        - name: request-success-rate
+          threshold: 99
+          interval: 1m
         webhooks:
           - name: "integration tests"
             type: pre-rollout
