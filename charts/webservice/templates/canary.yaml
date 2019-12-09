@@ -26,5 +26,5 @@ spec:
       tls:
         mode: {{ .Values.canary.istioTLS }}
   canaryAnalysis:
-    {{ toYaml  .Values.canary.config | indent 4 }}
+{{ toYaml .Values.canary.config | indent 4 }}
 {{- end }}
