@@ -4,11 +4,10 @@ apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
   name: express-app
-  namespace: flux
+  namespace: default
   annotations:
     flux.weave.works/automated: "false"
     flux.weave.works/tag.chart-image: glob:dev-*
-    fluxcd.io/locked: "true"
 spec:
   releaseName: express-app-flux
   chart:
