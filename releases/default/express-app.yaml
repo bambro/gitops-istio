@@ -15,7 +15,7 @@ spec:
     path: charts/webservice
     ref: master
   values:
-    image: allclasspenguin/node-express-app:dev-00034
+    image: allclasspenguin/node-express-app:dev-00036
     replicaCount: 1
     service:
       port: 8080
@@ -27,7 +27,7 @@ spec:
         webhooks:
           - name: "integration tests"
             type: pre-rollout
-            url: "http://admin:admin@host.docker.internal:8080/"
+            url: "http://my-release-jenkins.default:8080/generic-webhook-trigger/invoke"
             timeout: 10s
             metadata:
               some: "message"
