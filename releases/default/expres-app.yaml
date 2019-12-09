@@ -9,7 +9,7 @@ metadata:
     flux.weave.works/automated: "false"
     flux.weave.works/tag.chart-image: glob:dev-*
 spec:
-  releaseName: express-app-flux
+  releaseName: express-app-default
   chart:
     git: git@github.com:bambro/gitops-istio
     path: charts/webservice
