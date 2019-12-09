@@ -21,3 +21,13 @@ spec:
       port: 8080
     deployment:
       containerPort: 8080
+    canary:
+      enabled: true
+      config:
+        webhooks:
+          - name: "integration tests"
+            type: pre-rollout
+            url: "http://admin:admin@host.docker.internal:8080/generic-webhook-trigger/invoke"
+            timeout: 1m
+            metadata:
+              some: "message"

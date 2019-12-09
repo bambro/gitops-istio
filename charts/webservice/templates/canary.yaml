@@ -26,25 +26,5 @@ spec:
       tls:
         mode: {{ .Values.canary.istioTLS }}
   canaryAnalysis:
-    interval: {{ .Values.canary.analysis.interval }}
-    threshold: {{ .Values.canary.analysis.threshold }}
-    maxWeight: {{ .Values.canary.analysis.maxWeight }}
-    stepWeight: {{ .Values.canary.analysis.stepWeight }}
-    metrics:
-    - name: request-success-rate
-      threshold: {{ .Values.canary.thresholds.successRate }}
-      interval: 1m
-    - name: request-duration
-      threshold: {{ .Values.canary.thresholds.latency }}
-      interval: 30s
-    webhooks:
-      {{- if .Values.canary.loadtest.enabled }}
-      - name: load-test
-        url: {{ .Values.canary.loadtest.url }}
-        timeout: 5s
-        metadata:
-          type: cmd
-          cmd: "hey -z 1m -q 5 -c 2 http://{{ template "webservice.fullname" . }}.{{ .Release.Namespace }}:{{ .Values.service.port }}"
-          logCmdOutput: "true"
-      {{- end }}
+    {{ toYaml  .Values.canary.config | indent 4 }}
 {{- end }}
