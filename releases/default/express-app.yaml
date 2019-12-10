@@ -15,7 +15,7 @@ spec:
     path: charts/webservice
     ref: master
   values:
-    image: allclasspenguin/node-express-app:dev-00035
+    image: allclasspenguin/node-express-app:dev-00036
     replicaCount: 1
     service:
       port: 8080
@@ -25,7 +25,7 @@ spec:
       enabled: true
       config:
         # interval: 1m
-        threshold: 2
+        threshold: 3
         # maxWeight: 50
         # stepWeight: 10
         # metrics:
@@ -33,9 +33,11 @@ spec:
         #   threshold: 99
         #   interval: 1m
         webhooks:
-          - name: "integration tests"
-            type: pre-rollout
-            url: "http://jenkins-webhook-svc.default:8080/jenkins/webhook"
-            timeout: 2m
-            metadata:
-              some: "message"
+        - name: "integration tests"
+          type: pre-rollout
+          url: "http://jenkins-webhook-svc.default:8080/jenkins/webhook"
+          timeout: 2m
+        - name: "cleanup jenkins webhook"
+          type: post-rollout
+          url: "http://jenkins-webhook-svc.default:8080/jenkins/webhook/cleanup"
+          timeout: 5s
