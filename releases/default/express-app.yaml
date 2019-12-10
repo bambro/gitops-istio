@@ -15,7 +15,7 @@ spec:
     path: charts/webservice
     ref: master
   values:
-    image: allclasspenguin/node-express-app:dev-00035
+    image: allclasspenguin/node-express-app:dev-00036
     replicaCount: 1
     service:
       port: 8080
@@ -24,14 +24,14 @@ spec:
     canary:
       enabled: true
       config:
-        interval: 1m
-        threshold: 10
-        maxWeight: 50
-        stepWeight: 10
-        metrics:
-        - name: request-success-rate
-          threshold: 99
-          interval: 1m
+        # interval: 1m
+        # threshold: 10
+        # maxWeight: 50
+        # stepWeight: 10
+        # metrics:
+        # - name: request-success-rate
+        #   threshold: 99
+        #   interval: 1m
         webhooks:
           - name: "integration tests"
             type: pre-rollout
