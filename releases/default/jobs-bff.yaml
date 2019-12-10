@@ -19,7 +19,7 @@ spec:
     replicaCount: 1
     docker:
       imagePullSecrets:
-        - jfrog
+        - name: jfrog
     service:
       port: 4000
     deployment:
