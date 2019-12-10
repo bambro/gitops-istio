@@ -15,7 +15,7 @@ spec:
     path: charts/webservice
     ref: master
   values:
-    image: allclasspenguin/node-express-app:dev-00036
+    image: allclasspenguin/node-express-app:dev-00035
     replicaCount: 1
     service:
       port: 8080
@@ -25,7 +25,7 @@ spec:
       enabled: true
       config:
         # interval: 1m
-        # threshold: 10
+        threshold: 1
         # maxWeight: 50
         # stepWeight: 10
         # metrics:
