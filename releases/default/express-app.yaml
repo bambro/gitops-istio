@@ -15,7 +15,7 @@ spec:
     path: charts/webservice
     ref: master
   values:
-    image: allclasspenguin/node-express-app:dev-00035
+    image: allclasspenguin/node-express-app:dev-00036
     replicaCount: 1
     service:
       port: 8080
@@ -37,6 +37,8 @@ spec:
           type: pre-rollout
           url: "http://jenkins-webhook-svc.default:8080/jenkins/webhook"
           timeout: 2m
+          metadata:
+            jobname: integration-test-job
         - name: "cleanup jenkins webhook"
           type: post-rollout
           url: "http://jenkins-webhook-svc.default:8080/jenkins/webhook/cleanup"
